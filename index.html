@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
         rel="stylesheet">
 
     <title>Retro</title>
-
+    <script src="https://kit.fontawesome.com/f8e7655de4.js" crossorigin="anonymous"></script>
     <style>
         .mulishFont {
             font-family: "Mulish", sans-serif;
@@ -25,7 +25,41 @@
     </style>
 </head>
 
-<body>
+<body class="mulishFont">
+    <header class="w-9/12 mx-auto my-10">
+        <div class="flex justify-between">
+            <div>
+                <h3 class="text-4xl font-black colorText">ReTro</h3>
+            </div>
+            <div class="flex justify-between gap-4">
+                <div class="tooltip" data-tip="Home">
+                    <button class="btn rounded-[100%] border-2 border-gray-200">
+                        <i class="fa-solid fa-house"></i>
+                    </button>
+                </div>
+                <div class="tooltip" data-tip="Edit">
+                    <button class="btn rounded-[100%] border-2 border-gray-200">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                </div>
+                <div class="tooltip" data-tip="Register">
+                    <button class="btn rounded-[100%] border-2 border-gray-200">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </div>
+                <div class="tooltip" data-tip="About">
+                    <button class="btn rounded-[100%] border-2 border-gray-200">
+                        <i class="fa-solid fa-flag"></i>
+                    </button>
+                </div>
+                <div class="ml-4">
+                    <button class="btn btn-primary bg-[#797DFC] rounded-3xl px-10 text-white border-none">Sign
+                        In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
 
 
     <script src="main.js"></script>
