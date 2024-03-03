@@ -180,17 +180,23 @@ const displayLatestPost = (latestPosts) => {
 
 const searchBtn = async () => {
     const inputFieldValue = document.getElementById("inputField").value;
-    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputFieldValue}`);
-    const data = await res.json();
-    const forumPost = data.posts;
-    const forumContainer = document.getElementById("forumContainer");
-    forumContainer.innerHTML = "";
-    loadingDisplay(true);
-    setTimeout(() => {
-        displayForumPost(forumPost);
-    }, 2000)
-
-
+    const inputValue = inputFieldValue.toLowerCase();
+    console.log(inputValue);
+    if (inputValue === "comedy" || inputValue === "music" || inputValue === "coding") {
+        const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputFieldValue}`);
+        const data = await res.json();
+        const forumPost = data.posts;
+        const forumContainer = document.getElementById("forumContainer");
+        forumContainer.innerHTML = "";
+        loadingDisplay(true);
+        setTimeout(() => {
+            displayForumPost(forumPost);
+        }, 2000);
+    }
+    else {
+        window.alert("Please search the correct category");
+        loadForum();
+    }
 
 }
 
