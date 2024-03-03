@@ -37,16 +37,16 @@ const displayForumPost = (forumPosts) => {
                         </div>
                     </div>
                     <div class="w-full">
-                        <p><span># ${post.category}</span><span class="ml-10">Author : ${post.author.name}</span></p>
+                        <p><span>#${post.category}</span><span class="ml-4 lg:ml-10">Author: ${post.author.name}</span></p>
                         <h4 class="text-2xl font-extrabold colorText my-4">${post.title}
                         </h4>
                         <p class="text-[#12132d9d] border-b-2 border-[#12132d9d] border-dashed pb-4">${post.description}</p>
                         <div class="mt-4 flex justify-between items-center">
                             <div>
                                 <p class="text-[#12132d9d]">
-                                    <span class="mr-5"><i class="fa-regular fa-message mr-4"></i>${post.comment_count}</span>
-                                    <span class="mr-5"><i class="fa-regular fa-eye mr-4"></i>${post.view_count}</span>
-                                    <span class="mr-5"><i class="fa-regular fa-clock mr-4"></i>${post.posted_time} min</span>
+                                    <span class="mr-3 lg:mr-5"><i class="fa-regular fa-message mr-2 lg:mr-4"></i>${post.comment_count}</span>
+                                    <span class="mr-3 lg:mr-5"><i class="fa-regular fa-eye mr-2 lg:mr-4"></i>${post.view_count}</span>
+                                    <span class="mr-3 lg:mr-5"><i class="fa-regular fa-clock mr-2 lg:mr-4"></i>${post.posted_time} min</span>
                                 </p>
                             </div>
                             <div>
