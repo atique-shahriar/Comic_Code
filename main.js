@@ -19,14 +19,12 @@ const displayForumPost = (forumPosts) => {
     markReadCount.innerText = 0;
     const forumReadContainerField = document.getElementById("forumReadContainer ");
     forumReadContainerField.innerHTML = "";
-
+    let count = 0;
     forumPosts.forEach(post => {
-        console.log(post);
-
         const singleForum = document.createElement("div");
-        singleForum.classList.add("singleForum", "bg-slate-200", "p-6", "flex", "gap-4", "rounded-xl");
+        singleForum.classList.add("bg-slate-200", "p-6", "flex", "gap-4", "rounded-xl");
+        singleForum.setAttribute("id", `singleForum${count}`)
         const title = post.title.replace(/'/g, "@");
-
         if (post.isActive === true) {
             singleForum.innerHTML = `
                     <div>
@@ -91,9 +89,13 @@ const displayForumPost = (forumPosts) => {
         }
         console.log(post.title, post.view_count);
         forumContainer.appendChild(singleForum);
-
+        count++;
     });
+
     loadingDisplay(false);
+    const forum = document.getElementById("singleForum0");
+    forum.classList.add("border-2", "border-slate-500", "bg-slate-300")
+
 }
 
 
