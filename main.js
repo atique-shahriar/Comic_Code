@@ -2,7 +2,10 @@ const loadForum = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/posts");
     const data = await res.json();
     const forumPosts = data.posts;
-    displayForumPost(forumPosts);
+    loadingDisplay(true);
+    setTimeout(() => {
+        displayForumPost(forumPosts);
+    }, 2000)
 
 }
 
@@ -90,7 +93,7 @@ const displayForumPost = (forumPosts) => {
         forumContainer.appendChild(singleForum);
 
     });
-
+    loadingDisplay(false);
 }
 
 
@@ -180,7 +183,13 @@ const searchBtn = async () => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputFieldValue}`);
     const data = await res.json();
     const forumPost = data.posts;
-    displayForumPost(forumPost);
+    const forumContainer = document.getElementById("forumContainer");
+    forumContainer.innerHTML = "";
+    loadingDisplay(true);
+    setTimeout(() => {
+        displayForumPost(forumPost);
+    }, 2000)
+
 
 
 }
