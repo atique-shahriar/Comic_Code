@@ -1,4 +1,3 @@
-
 const loadForum = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/posts");
     const data = await res.json();
@@ -7,17 +6,24 @@ const loadForum = async () => {
 
 }
 
-loadForum();
+
 
 const displayForumPost = (forumPosts) => {
 
     const forumContainer = document.getElementById("forumContainer");
+    forumContainer.innerHTML = "";
+    const markReadCount = document.getElementById("markReadCount");
+    markReadCount.innerText = 0;
+    const forumReadContainerField = document.getElementById("forumReadContainer ");
+    forumReadContainerField.innerHTML = "";
+
     forumPosts.forEach(post => {
         console.log(post);
 
         const singleForum = document.createElement("div");
         singleForum.classList.add("singleForum", "bg-slate-200", "p-6", "flex", "gap-4", "rounded-xl");
         const title = post.title.replace(/'/g, "@");
+
         if (post.isActive === true) {
             singleForum.innerHTML = `
                     <div>
@@ -84,6 +90,7 @@ const displayForumPost = (forumPosts) => {
         forumContainer.appendChild(singleForum);
 
     });
+
 }
 
 
@@ -93,8 +100,8 @@ const markRead = (postTitle, postViewCount) => {
     const markReadCount = document.getElementById("markReadCount");
     let markReadCountValue = markReadCount.innerText;
     markReadCountValue++;
-
     const forumReadContainerField = document.getElementById("forumReadContainer ")
+
     const singleForumRead = document.createElement("div");
     singleForumRead.classList.add("flex", "justify-between", "p-4", "bg-white", "rounded-xl", "mt-5");
     singleForumRead.innerHTML = `
@@ -116,7 +123,6 @@ const latestPost = async () => {
     const latestPosts = data;
     displayLatestPost(latestPosts);
 }
-
 
 
 
@@ -167,4 +173,32 @@ const displayLatestPost = (latestPosts) => {
     });
 }
 
+
+
+const searchBtn = async () => {
+    const inputFieldValue = document.getElementById("inputField").value;
+    const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${inputFieldValue}`);
+    const data = await res.json();
+    const forumPost = data.posts;
+    displayForumPost(forumPost);
+
+
+}
+
+
+const loadingDisplay = (isDisplay) => {
+    const loadingSection = document.getElementById("loadingSection");
+
+    if (isDisplay === true) {
+        loadingSection.classList.remove("hidden");
+        console.log(isDisplay);
+    } else {
+        loadingSection.classList.add("hidden");
+        console.log(isDisplay);
+    }
+
+
+}
+
+loadForum();
 latestPost();

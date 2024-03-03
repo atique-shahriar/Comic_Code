@@ -69,9 +69,10 @@
                         <h1 class="mb-5 text-3xl md:text-5xl font-black">Welcome to the ReTro Forum</h1>
                         <p class="mb-5">Share your favorite opinion and win and wp forum coffee mug!</p>
                         <div class="flex items-center">
-                            <input type="text" class="grow h-12 rounded-l-lg p-5" placeholder="Search here anything" />
-                            <button
-                                class="btn btn-primary w-32 h-12 rounded-none rounded-r-lg bg-[#797DFC] border-none">Search</button>
+                            <input type="text" class="grow h-12 rounded-l-lg p-5 text-black" id="inputField"
+                                placeholder="Search here anything" />
+                            <button class="btn btn-primary w-32 h-12 rounded-none rounded-r-lg bg-[#797DFC] border-none"
+                                onclick="searchBtn()">Search</button>
                         </div>
                     </div>
                     <div class="bg-white rounded-2xl w-4/5 lg:w-[40%]">
@@ -105,6 +106,16 @@
             <p class="text-center max-w-xl mx-auto my-8">Yes, you can run unit tests and view the results directly
                 within the app. The integrated testing features allow for a streamlined .</p>
         </div>
+        <!-- Loading Section -->
+        <div class="hidden" id="loadingSection">
+            <div class="flex justify-center items-center gap-6 w-full h-56">
+                <span class="loading loading-dots loading-xs"></span>
+                <span class="loading loading-dots loading-sm"></span>
+                <span class="loading loading-dots loading-md"></span>
+                <span class="loading loading-dots loading-lg"></span>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2 flex flex-col gap-8" id="forumContainer">
                 <!-- <div class="singleForum bg-slate-200 p-6 flex gap-4 rounded-xl">
