@@ -87,8 +87,6 @@ const displayForumPost = (forumPosts) => {
 }
 
 
-
-
 const markRead = (postTitle, postViewCount) => {
     postTitle = postTitle.replace(/@/g, "'")
 
@@ -109,3 +107,64 @@ const markRead = (postTitle, postViewCount) => {
     forumReadContainerField.appendChild(singleForumRead);
     markReadCount.innerText = markReadCountValue;
 }
+
+
+
+const latestPost = async () => {
+    const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/latest-posts");
+    const data = await res.json();
+    const latestPosts = data;
+    displayLatestPost(latestPosts);
+}
+
+
+
+
+const displayLatestPost = (latestPosts) => {
+    const latestPostContainer = document.getElementById("latestPostContainer");
+    latestPosts.forEach(post => {
+        console.log(post);
+
+        const singlePost = document.createElement("div");
+        singlePost.classList.add("card", "bg-base-100", "shadow-xl", "border-2");
+        let postDate, designationName;
+        if (post.author.posted_date) {
+            postDate = post.author.posted_date;
+        }
+        else {
+            postDate = "No publish date";
+        }
+
+        if (post.author.designation) {
+            designationName = post.author.designation;
+        }
+        else {
+            designationName = "Unknown"
+        }
+
+        singlePost.innerHTML = `
+        <figure class="px-8 pt-8">
+                    <img src="${post.cover_image}" alt="post"
+                        class="rounded-xl" />
+                </figure>
+                <div class="card-body">
+                    <p class="text-[#12132d9a]"><i class="fa-regular fa-calendar mr-4"></i><span>${postDate}</span></p>
+                    <h2 class="card-title font-bold my-2">${post.title}</h2>
+                    <p class="text-[#12132d9a]">${post.description}</p>
+                    <div class="my-2 flex gap-4 items-center">
+                        <div>
+                            <img src="${post.profile_image}" alt="" class="rounded-[100%] w-9 h-9">
+                        </div>
+                        <div>
+                            <h4 class="font-bold">${post.author.name}</h4>
+                            <h3 class="text-[#12132d9a]">${designationName}</h3>
+                        </div>
+                    </div>
+                </div>
+        `
+
+        latestPostContainer.appendChild(singlePost);
+    });
+}
+
+latestPost();
