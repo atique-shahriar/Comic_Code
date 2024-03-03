@@ -1,3 +1,4 @@
+
 const loadForum = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/retro-forum/posts");
     const data = await res.json();
@@ -16,6 +17,7 @@ const displayForumPost = (forumPosts) => {
 
         const singleForum = document.createElement("div");
         singleForum.classList.add("singleForum", "bg-slate-200", "p-6", "flex", "gap-4", "rounded-xl");
+        const title = post.title.replace(/'/g, "@");
         if (post.isActive === true) {
             singleForum.innerHTML = `
                     <div>
@@ -41,7 +43,7 @@ const displayForumPost = (forumPosts) => {
                                 </p>
                             </div>
                             <div>
-                               <button onclick="markRead(${post.title},${post.view_count})"> <i class="fa-regular fa-envelope-open bg-green-600 p-2 rounded-[100%] text-white"></i></button>
+                               <button onclick="markRead('${title}','${post.view_count}')"> <i class="fa-regular fa-envelope-open bg-green-600 p-2 rounded-[100%] text-white"></i></button>
                             </div>
                         </div>
                     </div>
@@ -72,12 +74,13 @@ const displayForumPost = (forumPosts) => {
                                 </p>
                             </div>
                             <div>
-                            <button onclick="markRead(${post.title},${post.view_count})"> <i class="fa-regular fa-envelope-open bg-green-600 p-2 rounded-[100%] text-white"></i></button>
+                            <button onclick="markRead('${title}','${post.view_count}')"> <i class="fa-regular fa-envelope-open bg-green-600 p-2 rounded-[100%] text-white"></i></button>
                             </div>
                         </div>
                     </div>
 `
         }
+        console.log(post.title, post.view_count);
         forumContainer.appendChild(singleForum);
 
     });
@@ -86,4 +89,23 @@ const displayForumPost = (forumPosts) => {
 
 
 
+const markRead = (postTitle, postViewCount) => {
+    postTitle = postTitle.replace(/@/g, "'")
 
+    const markReadCount = document.getElementById("markReadCount");
+    let markReadCountValue = markReadCount.innerText;
+    markReadCountValue++;
+
+    const forumReadContainerField = document.getElementById("forumReadContainer ")
+    const singleForumRead = document.createElement("div");
+    singleForumRead.classList.add("flex", "justify-between", "p-4", "bg-white", "rounded-xl", "mt-5");
+    singleForumRead.innerHTML = `
+    <div>${postTitle}</div>
+                        <div class="flex items-center">
+                            <i class="fa-solid fa-eye mr-4"></i>
+                            <p>${postViewCount}</p>
+                        </div>
+    `
+    forumReadContainerField.appendChild(singleForumRead);
+    markReadCount.innerText = markReadCountValue;
+}
